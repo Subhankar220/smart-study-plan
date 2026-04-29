@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Study Planner</title>
+</head>
+<body style="font-family: Arial; padding-left: 200px; background-color: #facccc;">
+
+  <h2>📚 Smart Study Planner</h2>
+
+  <label>Subject:</label><br>
+  <input type="text" id="subject"><br><br>
+
+  <label>Deadline:</label><br>
+  <input type="date" id="deadline"><br><br>
+
+  <button onclick="generatePlan()">Generate Plan</button>
+
+  <h3 id="result"></h3>
+
+  <script>
+    function generatePlan() {
+      let subject = document.getElementById("subject").value;
+      let deadline = new Date(document.getElementById("deadline").value);
+      let today = new Date();
+
+      let diffTime = deadline - today;
+      let daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      if (daysLeft > 0) {
+        let hoursPerDay = (3 / daysLeft).toFixed(2);
+        document.getElementById("result").innerText =
+          "Study " + hoursPerDay + " hrs/day for " + subject;
+      } else {
+        document.getElementById("result").innerText =
+          "Please select a future date!";
+      }
+    }
+  </script>
+
+</body>
+</html>
